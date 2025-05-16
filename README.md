@@ -94,3 +94,6 @@ A phone-sized desktop app (360 x 640 window) for front-desk staff.
    – phone portrait size, grey theme, styled Treeview grids
 
 -------------------------------------------------------------
+Muhammad Muntazar Tasiu 20231725
+Muhammad Lele 20231940
+Almuktar Sani 20230101
