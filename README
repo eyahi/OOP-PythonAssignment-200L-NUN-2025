@@ -1,0 +1,129 @@
+ # Snake Game in Python using OOP Principles
+
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Learning Objectives](#learning-objectives)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [How to Run](#how-to-run)
+- [Sound Effects](#sound-effects)
+- [Class Responsibilities](#class-responsibilities)
+  - [Snake](#snake-snakepy)
+  - [Food](#food-foodpy)
+  - [SnakeGame](#snakegame-snakegamepy)
+  - [UI](#ui-uipy)
+  - [Setting](#setting-settingpy)
+- [Future Improvements](#future-improvements)
+- [License](#license)
+
+## Project Overview
+This is a classic **Snake Game** implemented in Python using **Object-Oriented Programming (OOP)** principles. The player controls a snake that grows as it eats food, and the game ends if the snake collides with the wall or itself.
+
+## Features
+- Snake movement and growth
+- Random food generation (Banana, Apple, and Orange)
+- Collision detection with the walls and the snake’s body
+- High score tracking and display
+- Start button to start the game
+- Quit button to exit the game
+- Sound effects:
+  - Crunch sound when eating food
+  - Game over sound when colliding with the wall
+- Game over screen
+- UI rendering for text and score and buttons
+- Settings file for easy game configuration
+
+## Learning Objectives
+- Apply OOP principles like classes, encapsulation, and modular design
+- Use **Pygame** for graphics, sound effects, and event handling
+- Manage game state and implement a game loop
+- Improve code organization through modularization
+
+## Project Structure
+The project is modular and organized into multiple files, each with a clear responsibility:
+SnakeGame/
+│
+├── snake_game.py       # Main game loop and core game logic
+├── snake.py            # Snake class - handles movement, growth, and collision
+├── food.py             # Food class - handles food generation and positioning
+├── UI.py               # UI class - displays score, high score, buttons, and messages
+├── setting.py          # Stores game settings like screen size, colors, and speed
+├── high_score.txt      # Stores the high score across sessions
+└── README.md           # Project documentation
+
+### File Descriptions:
+
+- **`snake_game.py`**  
+  This file is the main application for running the game. It contains the `SnakeGame` class, which handles initializing the game, running the game loop, updating the state of the game, and rendering objects. It also manages user input.
+
+- **`snake.py`**  
+  Defines the `Snake` class. This class manages the snake's body segments, controls its movement, handles growth after eating food, and checks for collisions with the walls or itself.
+
+- **`food.py`**  
+  Defines the `Food` class. This class generates food at random positions and handles the logic of spawning different types of food like Banana, Apple, and Orange.
+
+- **`UI.py`**  
+  This file defines the user interface, managing the rendering of the game score, the game over screen, and other UI elements to provide feedback to the player.
+
+- **`setting.py`**  
+  Contains configuration details like screen size, block size, food types, game speed, and color settings. It centralizes the game's settings for easy adjustments.
+
+- **`README.md`**  
+  Documentation of the project, providing an overview, installation instructions, usage details, and other important information about the game.
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <your-repo-url>
+   cd SnakeGame
+   pip install pygame
+   
+## How to Run
+
+Use the arrow keys to control the snake:  
+- **Up** – Move Up  
+- **Down** – Move Down  
+- **Left** – Move Left  
+- **Right** – Move Right  
+
+## Sound Effects
+
+- **Crunch sound** plays when the snake eats food  
+- **Game over sound** plays when the snake collides with the wall  
+
+## Class Responsibilities
+
+### Snake (`snake.py`)
+- Manages body segments, direction, and growth after eating food
+
+### Food (`food.py`)
+- Randomly spawns food (Banana, Apple, Orange) at valid positions
+
+### SnakeGame (`snake_game.py`)
+- Controls the game loop, input handling, game state, and logic  
+- Detects collisions and plays the corresponding sounds
+
+### UI (`UI.py`)
+- Renders score, high score, game over message, and other UI elements
+
+### Setting (`setting.py`)
+- Stores constants like screen size, colors, block size, game speed, and food types  
+- Centralizes game parameters for easy configuration
+
+## Future Improvements
+
+- Add big food that scores more than one point  
+- Make the snake look more realistic (instead of rectangular boxes)  
+- Add more complex levels and obstacles  
+
+## Contributors
+
+- **Maryam Abdullahi** – 20231533  
+- **Aminatu Kabir Tukur** – 20231685  
+- **Anjolaoluwa Rhoda Olatunde** – 20232463
+
+## License
+
+This project is for educational purposes.
