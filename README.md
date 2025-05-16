@@ -1,40 +1,26 @@
-# Python Hotel Management System
+# 🐍 Snake Game in Python
 
-A Hotel Management System Created in python using tkinter [Python TKinter]([https://www.pygame.org/docs/](https://docs.python.org/3/library/tk.html)).
+This is a simple classic Snake Game built using Python and the Pygame library. Designed as a school project, it is a fun and interactive way to learn game loops, user input handling, and basic graphics in Python.
 
-## Basic Instructions
+---
 
-Launch the gui and add a room to the database using the add room button 
-1. Create a room using the add room button.
-2. Select a room and book a reservation.
+## 🎮 Features
 
-## Download and Run
+- Grid-based movement with keyboard controls
+- Eat food to grow the snake
+- Game over if snake hits wall or itself
+- Score display
+- Adjustable speed setting
+- Simple UI prompt at startup
 
-1. Make sure you have Python installed. Install Python at [python.org](https://www.python.org/downloads/).
-2. Download the folder from github
-3. Create a virtual environment.
+---
 
-```
-python -m venv environment
-```
+## 🧰 Requirements
 
-4. Activate the virtual environment
+- Python 3.7 or newer
+- Pygame
 
-- For windows
+Install dependencies:
 
-```
-.\path\to\venv\Scripts\Activate
-```
-
-- For macOS/Linux
-
-```
-source path/to/venv/bin/activate
-```
-
-5. Run the hotel_management.py
-
-```
-python hotel_management.py
-```
-
+```bash
+pip install pygame
