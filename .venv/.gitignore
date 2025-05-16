@@ -1,0 +1,9 @@
+# Python virtualenv
+.venv/
+Lib/
+Scripts/
+pyvenv.cfg
+
+# Byte-compiled files
+__pycache__/
+*.py[cod]
