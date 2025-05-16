@@ -50,4 +50,4 @@ python password_manager_gui.py
 
 ## License
 
-This project is made by Abdulrahman Mohammed, Suleiman Baba Ahmed and Safiya Abubakar for educational purposes, You are free to coopy and spread it however you wish.
+This project is made by Abdulrahman Mohammed 20231571, Suleiman Baba Ahmed 20231220 and Safiya Abubakar 20232018for educational purposes, You are free to coopy and spread it however you wish.
