@@ -1,74 +1,61 @@
 # simple snake game
 # by ifon jason and prince
 
-import turtle  # turtle enables users to create pictures and shapes by providing them with a virtual canvas.
-import time    # create a delay
-import random
-import pygame  # for background music
+import turtle  # Turtle is used to create the graphics
+import time  # For delays
+import random  # To randomize food position
+import pygame  # For music playback
 
-# Initialize mixer
-pygame.mixer.init()
+pygame.mixer.init()  # Initialize pygame mixer
+pygame.mixer.music.load("background.mp3")  # Load background music file
+pygame.mixer.music.play(-1)  # Loop background music forever
 
-# importing music
-# Load music file
-pygame.mixer.music.load("background.mp3")  # put your music file name here
-pygame.mixer.music.play(-1)  # -1 means loop forever
+delay = 0.1  # Initial game speed
+score = 0  # Starting score
+best_score = 0  # Highest score
 
-delay = 0.1
+# Set up the screen
+wn = turtle.Screen()  # Create screen object
+wn.title("slither.io")  # Set window title
+wn.bgpic("back.gif")  # Set background image
+wn.setup(width=600, height=600)  # Set size of the window
+wn.tracer(0)  # Turn off automatic screen updates
 
-# Score
-score = 0
-best_score = 0
+# Create a turtle to display the menu
+wn.addshape("menu.gif")  # Load menu image
+menu_turtle = turtle.Turtle()  # Create turtle object
+menu_turtle.speed(0)  # Max speed
+menu_turtle.shape("menu.gif")  # Set menu image
+menu_turtle.penup()  # Don’t draw lines
+menu_turtle.goto(0, 0)  # Center menu image
 
-# set the screen, wn = window
-wn = turtle.Screen()
-wn.title("slither.io")
-wn.bgpic("back.gif")
-wn.setup(width=600, height=600)
-wn.tracer(0)  # turns off screen updates
+game_started = False  # Flag to control when game starts
 
-# --- MENU SETUP ---
-# Register and create a start menu
-wn.addshape("menu.gif")
-menu_turtle = turtle.Turtle()
-menu_turtle.speed(0)
-menu_turtle.shape("menu.gif")
-menu_turtle.penup()
-menu_turtle.goto(0, 0)
-
-# Game state
-game_started = False
-
-# function to start game
 def start_game():
     global game_started
-    game_started = True
-    menu_turtle.hideturtle()  # hide the menu
+    game_started = True  # Change flag to start the game
+    menu_turtle.hideturtle()  # Hide menu image
 
-# Listen for space key to start
-wn.listen()
-wn.onkey(start_game, "space")
+wn.listen()  # Listen for key presses
+wn.onkey(start_game, "space")  # Start game when space is pressed
 
-# wait for the player to press space
 while not game_started:
-    wn.update()
+    wn.update()  # Keep refreshing screen until game starts
 
-# --- AFTER SPACE, GAME STARTS ---
-
-# snake head
+# Register snake images
 wn.addshape("head_up.gif")
 wn.addshape("head_down.gif")
 wn.addshape("head_left.gif")
 wn.addshape("head_right.gif")
 
-head = turtle.Turtle()
+head = turtle.Turtle()  # Create snake head
 head.speed(0)
 head.shape("head_up.gif")
 head.penup()
 head.goto(0, 0)
-head.direction = "stop"
+head.direction = "start"  # Initial direction (not moving)
 
-# snake food
+# Add food
 wn.addshape("food.gif")
 food = turtle.Turtle()
 food.speed(0)
@@ -76,9 +63,9 @@ food.shape("food.gif")
 food.penup()
 food.goto(0, 100)
 
-segments = []
+segments = []  # List to store body parts
 
-# pen
+# Create score display
 pen = turtle.Turtle()
 pen.speed(0)
 pen.shape("square")
@@ -88,7 +75,7 @@ pen.hideturtle()
 pen.goto(0, 260)
 pen.write("score: 0 best score: 0", align="center", font=("courier", 24, "normal"))
 
-# register body and tail shapes
+# Add body part images
 wn.addshape("tail_up.gif")
 wn.addshape("tail_down.gif")
 wn.addshape("tail_left.gif")
@@ -100,7 +87,7 @@ wn.addshape("body_topright.gif")
 wn.addshape("body_bottomleft.gif")
 wn.addshape("body_bottomright.gif")
 
-# functions for snake movement
+# Movement controls
 def go_up():
     if head.direction != "down":
         head.direction = "up"
@@ -125,20 +112,17 @@ def move():
     if head.direction == "up":
         y = head.ycor()
         head.sety(y + 20)
-
     if head.direction == "down":
         y = head.ycor()
         head.sety(y - 20)
-
     if head.direction == "left":
         x = head.xcor()
         head.setx(x - 20)
-
     if head.direction == "right":
         x = head.xcor()
         head.setx(x + 20)
 
-# keyboard bindings
+# Keyboard bindings (arrows + WASD)
 wn.listen()
 wn.onkey(go_up, "Up")
 wn.onkey(go_down, "Down")
@@ -149,27 +133,24 @@ wn.onkey(go_down, "s")
 wn.onkey(go_left, "a")
 wn.onkey(go_right, "d")
 
-# main game loop
+# Main game loop
 while True:
     wn.update()
 
-    # check for collision with the border
+    # Border collision check
     if head.xcor() > 290 or head.xcor() < -290 or head.ycor() > 290 or head.ycor() < -290:
         time.sleep(1)
         head.goto(0, 0)
         head.direction = "stop"
-
         for segment in segments:
-            segment.goto(1000, 1000)
-
+            segment.goto(1000, 1000)  # Move off-screen
         segments.clear()
         score = 0
         delay = 0.1
-
         pen.clear()
         pen.write("score: {} best score: {}".format(score, best_score), align="center", font=("courier", 24, "normal"))
 
-    # check for collision with the food
+    # Food collision
     if head.distance(food) < 20:
         x = random.randint(-290, 290)
         y = random.randint(-290, 290)
@@ -177,34 +158,34 @@ while True:
 
         new_segment = turtle.Turtle()
         new_segment.speed(0)
-        new_segment.shape("body_horizontal.gif")  # default shape
+        new_segment.shape("body_horizontal.gif")
         new_segment.penup()
         segments.append(new_segment)
 
         delay -= 0.001
         score += 10
+
         if score > best_score:
             best_score = score
 
         pen.clear()
         pen.write("score: {} best score: {}".format(score, best_score), align="center", font=("courier", 24, "normal"))
 
-    # move the end segments first in reverse order
+    # Move body segments
     for index in range(len(segments) - 1, 0, -1):
         x = segments[index - 1].xcor()
         y = segments[index - 1].ycor()
         segments[index].goto(x, y)
 
-    # move segment 0 to follow head
     if len(segments) > 0:
         segments[0].goto(head.xcor(), head.ycor())
 
     move()
 
-    # update body parts shape
+    # --- Body image updating (THIS was missing in the version I sent before) ---
     for i in range(len(segments)):
         if i == len(segments) - 1:
-            # tail
+            # Tail direction based on previous segment
             if segments[i - 1].xcor() < segments[i].xcor():
                 segments[i].shape("tail_left.gif")
             elif segments[i - 1].xcor() > segments[i].xcor():
@@ -214,7 +195,7 @@ while True:
             elif segments[i - 1].ycor() > segments[i].ycor():
                 segments[i].shape("tail_up.gif")
         else:
-            # body
+            # Body segment logic
             prev_seg = head if i == 0 else segments[i - 1]
             next_seg = segments[i + 1]
 
@@ -236,23 +217,20 @@ while True:
             elif y1 == 0 and y2 == 0:
                 segments[i].shape("body_horizontal.gif")
 
-    # check for head collision with the body
+    # Collision with self
     for segment in segments:
         if segment.distance(head) < 20:
             time.sleep(1)
             head.goto(0, 0)
             head.direction = "stop"
-
             for segment in segments:
                 segment.goto(1000, 1000)
-
             segments.clear()
             score = 0
             delay = 0.1
-
             pen.clear()
             pen.write("score: {} best score: {}".format(score, best_score), align="center", font=("courier", 24, "normal"))
 
-    time.sleep(delay)
+    time.sleep(delay)  # Wait between frames
 
-wn.mainloop()
+wn.mainloop()  # Keep window open
